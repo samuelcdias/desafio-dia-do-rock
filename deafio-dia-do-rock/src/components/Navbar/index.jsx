@@ -1,13 +1,16 @@
-import { useState, useContext } from 'react';
+import {useState, useContext, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { DarkModeContext } from '../DarkModeProvider/index';
 import SearchBar from '../SearchBar/Index';
 import EventoForm from '../EventoForm/index';
+import CardEvent from "../CardEvent";
+import {MapInfoContext} from "../MapInfoProvider";
 
 
 const Navbar = () => {
     const [isExpanded, setIsExpanded] = useState(false);
     const { darkMode, setDarkMode } = useContext(DarkModeContext);
+    const { mapInfo, setPanTo } = useContext(MapInfoContext);
 
     const toggleExpansion = () => {
         setIsExpanded(!isExpanded);
@@ -69,7 +72,13 @@ const Navbar = () => {
                             <Routes>
                                 <Route path="/search" element={
                                     <div className='p-4  items-center py-10 text-primary '>
-                                        <SearchBar /></div>
+                                        <SearchBar />
+                                        {mapInfo.markers && mapInfo.markers.map((evento) => (<CardEvent title={evento.title}
+                                                                                        onClick={() => setPanTo(evento.position)}
+                                                                                        address={evento.address}
+                                                                                        datetime={evento.datetime}
+                                                                                        image={evento.image} />))}
+                                    </div>
                                 } />
                                 <Route path="/map" element={
                                     <div className='p-4 items-center py-10 text-primary '>Seu conteúdo para a rota MAPA aqui!</div>

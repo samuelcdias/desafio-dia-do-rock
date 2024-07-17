@@ -70,67 +70,68 @@ export const EventoForm = () => {
       };
 
     return(
-      <LoadScript
-        googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
-        libraries={["places"]}
-      >
-        <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-7 p-4 bg-transparent rounded">
-            <p className="font-semibold">Evento</p>
-            <hr className="my-4 border-primary" />
-            <div className="mb-4">
-                <label htmlFor="nome" className="block text-primary font-semibold mb-1">
-                    Nome:
-                </label>
-                <input
-                    type="text"
-                    id="nome"
-                    value={evento.title}
-                    onChange={(e) => setEvento({ ...evento, title: e.target.value })}
-                    className="w-full px-3 py-2 border rounded text-black focus:outline-none focus:ring focus:border-blue-300"
-                />
-            </div>
-            <div>
-              <label htmlFor="Imagem" className="block text-primary font-semibold mb-1">
-                Imagem:
-                <input type="file" accept="image/*" onChange={handleFileChange} className="w-full px-3 py-2 border rounded text-black focus:outline-none focus:ring focus:border-blue-300"/>
-                <div className={isHidden ? 'hidden' : 'block danger'}></div>
-              </label>
-            </div>
-            <div className="mb-4">
-                <label htmlFor="nome" className="block text-primary font-semibold mb-1">
-                    Localidade:
-                </label>
-                <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
-                    <input
-                    id="location"
-                    type="text"
-                    placeholder="Entre com um local"
-                    value={evento.address}
-                    onChange={(e) => setEvento({...evento, address: e.target.value})}
-                    className="location-input w-full px-3 py-2 border rounded text-black focus:outline-none focus:ring focus:border-blue-300"
-                    />
-                </Autocomplete>
-            </div>
-            <div className="mb-4">
-                <label htmlFor="data" className="block text-primary font-semibold mb-1">
-                    Data (dia e hora):
-                </label>
-                <input
-                    type="datetime-local"
-                    id="data"
-                    value={evento.datetime}
-                    onChange={(e) => setEvento({ ...evento, datetime: e.target.value })}
-                    className="w-full px-3 py-2 border rounded text-black focus:outline-none focus:ring focus:border-primary"
-                />
-            </div>
-            <button
-                type="submit"
-                className="bg-primary text-white w-full py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+      <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-7 p-4 bg-transparent rounded">
+        <p className="font-semibold">Evento</p>
+        <hr className="my-4 border-primary" />
+        <div className="mb-4">
+            <label htmlFor="nome" className="block text-primary font-semibold mb-1">
+                Nome:
+            </label>
+            <input
+                type="text"
+                id="nome"
+                value={evento.title}
+                onChange={(e) => setEvento({ ...evento, title: e.target.value })}
+                className="w-full px-3 py-2 border rounded text-black focus:outline-none focus:ring focus:border-blue-300"
+            />
+        </div>
+        <div>
+          <label htmlFor="Imagem" className="block text-primary font-semibold mb-1">
+            Imagem:
+            <input type="file" accept="image/*" onChange={handleFileChange} className="w-full px-3 py-2 border rounded text-black focus:outline-none focus:ring focus:border-blue-300"/>
+            <div className={isHidden ? 'hidden' : 'block danger'}></div>
+          </label>
+        </div>
+        <div className="mb-4">
+            <label htmlFor="nome" className="block text-primary font-semibold mb-1">
+                Localidade:
+            </label>
+            
+            <LoadScript
+              googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+              libraries={["places"]}
             >
-                Enviar
-            </button>
-        </form>
-      </LoadScript>
+              <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
+                <input
+                id="location"
+                type="text"
+                placeholder="Entre com um local"
+                value={evento.address}
+                onChange={(e) => setEvento({...evento, address: e.target.value})}
+                className="location-input w-full px-3 py-2 border rounded text-black focus:outline-none focus:ring focus:border-blue-300"
+                />
+              </Autocomplete>
+            </LoadScript>
+        </div>
+        <div className="mb-4">
+            <label htmlFor="data" className="block text-primary font-semibold mb-1">
+                Data (dia e hora):
+            </label>
+            <input
+                type="datetime-local"
+                id="data"
+                value={evento.datetime}
+                onChange={(e) => setEvento({ ...evento, datetime: e.target.value })}
+                className="w-full px-3 py-2 border rounded text-black focus:outline-none focus:ring focus:border-primary"
+            />
+        </div>
+        <button
+            type="submit"
+            className="bg-primary text-white w-full py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+        >
+            Enviar
+        </button>
+      </form>
     )
 }
 

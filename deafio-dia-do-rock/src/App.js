@@ -10,7 +10,7 @@ function App() {
     const {mapInfo} = useContext(MapInfoContext);
 
     return (
-        <div className={`flex ${darkMode ? 'dark' : ''}`}>
+        <div className={`flex ${darkMode ? 'dark' : 'light'}`}>
             <Navbar/>
             <div className='flex flex-col w-full'>
                 <LeafletMap zoom={4} markers={mapInfo.markers} center={{lat: -22.977112, lng: -43.396305}}

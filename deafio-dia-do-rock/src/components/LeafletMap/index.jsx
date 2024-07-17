@@ -8,7 +8,7 @@ export default function LeafletMap({center, zoom, markers = [], panTo = null}) {
     const [centerMap, setCenterMap] = React.useState(center);
     React.useEffect(() => {
         if(mapRef && panTo) {
-            mapRef.current.flyTo(panTo, zoom);
+            mapRef.current.flyTo(panTo, 13);
         }
     }, [panTo])
 
@@ -16,7 +16,7 @@ export default function LeafletMap({center, zoom, markers = [], panTo = null}) {
         <MapContainer center={centerMap} zoom={zoom} scrollWheelZoom={true} ref={mapRef}>
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                url={`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`}
             />
             {markers.map(item => (
                 <Marker

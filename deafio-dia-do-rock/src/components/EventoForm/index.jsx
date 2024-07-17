@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { LoadScript, Autocomplete } from '@react-google-maps/api';
+import { create } from '../../Api/eventoApi';
 
 export const EventoForm = () => {
     const [autocomplete, setAutocomplete] = useState(null);
@@ -35,21 +36,7 @@ export const EventoForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const response = await fetch('localhost:5000/eventos', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(evento),
-          });
-    
-          if (!response.ok) {
-            throw new Error('Erro ao enviar os dados');
-          }
-    
-          const data = await response.json();
-          console.log('Dados enviados com sucesso:', data);
-    
+          create(evento);
         } catch (error) {
           console.error('Erro ao enviar a requisição:', error);
         }

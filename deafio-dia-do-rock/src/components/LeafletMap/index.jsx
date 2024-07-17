@@ -1,5 +1,6 @@
 import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
 import React from "react";
+import 'moment/locale/pt-br'
 import moment from "moment/moment";
 
 export default function LeafletMap({center, zoom, markers = [], panTo = null}) {

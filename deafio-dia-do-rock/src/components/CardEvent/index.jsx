@@ -1,7 +1,7 @@
 import { DarkModeContext } from '../DarkModeProvider/index';
 import { useContext } from 'react';
 
-function CardEvent({ title, address, datetime, image }) {
+function CardEvent({ title, address, datetime, image, onClick }) {
     const { darkMode } = useContext(DarkModeContext);
     const addressCountry = address.split(',')[1].trim();
     const addressCity = address.split(',')[0].trim();
@@ -15,7 +15,7 @@ function CardEvent({ title, address, datetime, image }) {
     const formattedDate = date.getDate() + '/' + monthNames[date.getMonth()];
 
     return (
-        <div className={`${darkMode ? 'bg-dark text-light' : 'bg-light text-dark'} max-w-sm rounded overflow-hidden shadow-lg border-1 p-8 flex justify-between items-center h-40`}>
+        <div onClick={onClick} className={`${darkMode ? 'bg-dark text-light' : 'bg-light text-dark'} cursor-pointer max-w-sm rounded overflow-hidden shadow-lg border-1 p-8 flex justify-between items-center h-40`}>
             <div className="flex items-center">
                 {image && (
                     <img

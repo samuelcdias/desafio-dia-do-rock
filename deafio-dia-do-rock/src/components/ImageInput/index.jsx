@@ -27,10 +27,9 @@ export default function ImageInput({initialValue, onBlur, onChangeImage, onImage
 
             reader.readAsDataURL(e.target.files[0]);
             if(imageRef.current) {
-                onChangeImage(imageRef.current);
+                onChangeImage(e);
             }
         }
-
     }
 
     function handleRemoveImage(e) {

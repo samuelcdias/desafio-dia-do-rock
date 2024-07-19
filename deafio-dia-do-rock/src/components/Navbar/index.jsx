@@ -73,7 +73,8 @@ const Navbar = () => {
                                 <Route path="/search" element={
                                     <div className='p-4  items-center py-10 text-primary '>
                                         <SearchBar />
-                                        {mapInfo.markers && mapInfo.markers.map((evento) => (<CardEvent title={evento.title}
+                                        {mapInfo.markers && mapInfo.markers.map((evento) => (<CardEvent key={evento.id}
+                                                                                        title={evento.title}
                                                                                         onClick={() => setPanTo(evento.position)}
                                                                                         address={evento.address}
                                                                                         datetime={evento.datetime}

@@ -19,6 +19,21 @@ export default function MapInfoProvider({children}) {
         }
     }
 
+    async function getMarkerBySearch(search) {
+        try {
+            const data = await getAll();
+            const result = data.filter((item) => {
+                return item.title.toLowerCase().includes(search.toLowerCase())
+                    || item.description.toLowerCase().includes(search.toLowerCase())
+                    || item.address.toLowerCase().includes(search.toLowerCase());
+            });
+            setMapInfo((oldInfo) => ({...oldInfo, markers: result}));
+        } catch (error) {
+            console.error("Failed to fetch events:", error);
+        }
+
+    }
+
     useEffect(() => {
         getMarkers();
     }, []);
@@ -33,7 +48,7 @@ export default function MapInfoProvider({children}) {
     }
 
     return (
-        <MapInfoContext.Provider value={{mapInfo, setMapInfo, setPanTo, getMarkers, setZoom}}>
+        <MapInfoContext.Provider value={{mapInfo, setMapInfo, setPanTo, getMarkers, getMarkerBySearch, setZoom}}>
             {children}
         </MapInfoContext.Provider>
     );

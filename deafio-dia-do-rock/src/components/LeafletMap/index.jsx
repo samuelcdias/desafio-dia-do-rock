@@ -27,6 +27,9 @@ export default function LeafletMap({center, zoom, markers = [], panTo = null}) {
                     <Popup>
                         <div className={`flex flex-col w-52`}>
                             <h1 className="font-black text-lg">{item.title}</h1>
+                            {item.image && <div className="max-h-20 overflow-hidden rounded mt-2">
+                                <img className="w-full h-20 min-h-20 object-cover" src={item.image} alt={item.title}/>
+                            </div>}
                             <p>{item.description}</p>
 
                             <div className="flex flex-col gap-2 font-bold rounded">

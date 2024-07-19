@@ -7,6 +7,7 @@ export default function MapInfoProvider({children}) {
     const [mapInfo, setMapInfo] = useState({
         panTo: null,
         markers: [],
+        zoom: 4,
     });
 
     async function getMarkers() {
@@ -26,8 +27,13 @@ export default function MapInfoProvider({children}) {
         setMapInfo((oldInfo) => ({...oldInfo, panTo}));
     }
 
+    const setZoom = (zoom) => {
+        setMapInfo((oldInfo) => ({...oldInfo, zoom}));
+
+    }
+
     return (
-        <MapInfoContext.Provider value={{mapInfo, setMapInfo, setPanTo, getMarkers}}>
+        <MapInfoContext.Provider value={{mapInfo, setMapInfo, setPanTo, getMarkers, setZoom}}>
             {children}
         </MapInfoContext.Provider>
     );

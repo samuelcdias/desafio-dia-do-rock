@@ -42,11 +42,11 @@ Esta aplicação React utiliza o OpenStreetMap para exibir mapas e o Nominatim p
 
 HTTP
 
-    ```bash
+      bash
       [git clone](https://github.com/leonardoGasperin/desafio-dia-do-rock.git)
  
      cd desafio-dia-do-rock
-    ```
+    
   
 2. **Instale as dependências:**
 

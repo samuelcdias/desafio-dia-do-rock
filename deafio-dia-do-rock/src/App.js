@@ -1,34 +1,26 @@
-import {useContext, useEffect, useState} from 'react';
-import { DarkModeContext } from './components/DarkModeProvider';
+import {useContext} from 'react';
+import {DarkModeContext} from './components/DarkModeProvider';
 import './App.css';
 import Navbar from './components/Navbar';
-import Map from "./components/map";
-import {getAll} from "./Api/eventoApi";
+import LeafletMap from "./components/LeafletMap";
+import {MapInfoContext} from "./components/MapInfoProvider";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const { darkMode } = useContext(DarkModeContext);
-  const [eventos, setEventos] = useState([]);
+    const {darkMode} = useContext(DarkModeContext);
+    const {mapInfo} = useContext(MapInfoContext);
 
-  async function getEventos() {
-      try{
-          const data = await getAll();
-          setEventos(data);
-      } catch (error){}
-  }
-
-    useEffect(() => {
-        getEventos();
-    }, []);
-
-  return (
-    <div className={`flex ${darkMode ? 'dark' : ''}`}>
-      <Navbar />
-      <div className='flex flex-col w-full'>
-        <Map zoom={4} markers={eventos} center={{ lat: -22.977112, lng: -43.396305 }} />
-      </div >
-
-    </div >
-  );
+    return (
+        <div className={`flex ${darkMode ? 'dark' : 'light'}`}>
+            <Navbar/>
+            <div className='flex flex-col w-full'>
+                <LeafletMap zoom={mapInfo.zoom} markers={mapInfo.markers} center={{lat: -22.977112, lng: -43.396305}}
+                            panTo={mapInfo.panTo}/>
+            </div>
+            <ToastContainer theme={darkMode ? 'dark' : 'light'} />
+        </div>
+    );
 }
 
 export default App;

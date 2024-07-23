@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import DarkModeProvider from './components/DarkModeProvider';
+import MapInfoProvider from "./components/MapInfoProvider";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <DarkModeProvider>
-      <App />
+        <MapInfoProvider>
+            <App />
+        </MapInfoProvider>
     </DarkModeProvider>
 
   </React.StrictMode>

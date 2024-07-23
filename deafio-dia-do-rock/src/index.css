@@ -1,7 +1,40 @@
+.light {
+    --scrollbar-track: #d1dae5;
+    --scrollbar-thumb: #acb1b6;
+}
+
+.dark {
+    --scrollbar-track: #131219;
+    --scrollbar-thumb: #3f3e4b;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+}
+
+* {
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+    scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    border-radius: 20px;
+    border: 3px solid var(--scrollbar-track);
+}
 
 body {
   margin: 0;

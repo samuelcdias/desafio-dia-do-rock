@@ -1,0 +1,28 @@
+@BaseUrl = http://localhost:5071
+
+@Id = 1 
+## Inclua um ID para realizar testes
+
+### Get all
+GET {{BaseUrl}}/eventos/
+Accept: application/json
+
+### Get By Id
+GET {{BaseUrl}}/eventos/{{Id}}
+Accept: application/json
+
+### Create new event
+POST {{BaseUrL}}/eventos/
+Content-Type: application/json
+
+{
+    title: '',
+    image: '',
+    description: '',
+    address: '',
+    datetime: '',
+    position: {
+        lat: 0,
+        lng: 0,
+    },
+}

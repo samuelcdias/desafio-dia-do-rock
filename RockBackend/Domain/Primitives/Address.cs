@@ -2,7 +2,7 @@
 {
     public class Address
     {
-        private Name Name { get;}
+        public Name Name { get;}
         private Address() { }
         public Address(string name)
         {

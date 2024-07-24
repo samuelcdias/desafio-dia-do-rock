@@ -1,8 +1,21 @@
+using Microsoft.EntityFrameworkCore;
+using RockBackend.Data;
+using RockBackend.Dtos;
+using RockBackend.Service;
+
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddDbContext<AppDBContext>(
+    options => options.UseSqlite(
+        builder.Configuration.GetConnectionString("DefaultConnection")
+        )
+    );
+builder.Services.AddTransient<AppDBContext>();
+builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
@@ -17,24 +30,33 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 
-app.MapGet("/weatherforecast", () =>
+app.MapPost("/eventos", async (EventDto request, IEventService service) =>
 {
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
+    try
+    {
+        await service.AddEvent(request);
+        return Results.Created();
+    } catch (Exception ex)
+    {
+        return Results.BadRequest(ex.Message);
+    }
 })
-.WithName("GetWeatherForecast")
+.WithName("Eventos")
+.WithOpenApi();
+
+app.MapGet("/eventos", async (string filter, int page, IEventService service) =>
+{
+    try
+    {
+        var result = await service.GetEvents(filter, page);
+        return Results.Ok(result);
+    }
+    catch (Exception ex)
+    {
+        return Results.BadRequest(ex.Message);
+    }
+})
+.WithName("Eventos")
 .WithOpenApi();
 
 app.Run();
-
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

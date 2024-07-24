@@ -2,7 +2,7 @@
 
 public class Name
 {
-    public string? value { get; private set; } = null;
+    public string? Value { get; private set; } = null;
 
     private Name() { }
 
@@ -16,6 +16,6 @@ public class Name
         {
             throw new ArgumentOutOfRangeException(nameof(value));
         }
-        this.value = value;
+        this.Value = value;
     }
 }

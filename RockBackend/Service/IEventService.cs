@@ -4,5 +4,6 @@ namespace RockBackend.Service;
 
 public interface IEventService
 {
-    void AddEvent(CreateEventRequest request);
+    Task AddEvent(EventDto request);
+    Task<PaginationDto<EventDto>> GetEvents(string filtro, int page);
 }

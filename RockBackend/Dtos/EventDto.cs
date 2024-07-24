@@ -5,7 +5,7 @@ namespace RockBackend.Dtos;
 public class EventDto
 {
     [JsonPropertyName("id")]
-    public int? Id { get; set; }
+    public int? Id { get; set; } = null;
 
     [JsonPropertyName("title")]
     public string Title { get; set; } = string.Empty;

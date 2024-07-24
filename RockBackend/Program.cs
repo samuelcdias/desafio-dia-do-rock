@@ -41,10 +41,10 @@ app.MapPost("/eventos", async (EventDto request, IEventService service) =>
         return Results.BadRequest(ex.Message);
     }
 })
-.WithName("Eventos")
+.WithName("Criar Eventos")
 .WithOpenApi();
 
-app.MapGet("/eventos", async (string filter, int page, IEventService service) =>
+app.MapGet("/eventos", async(IEventService service, string ? filter = null, int page = 1) =>
 {
     try
     {
@@ -56,7 +56,7 @@ app.MapGet("/eventos", async (string filter, int page, IEventService service) =>
         return Results.BadRequest(ex.Message);
     }
 })
-.WithName("Eventos")
+.WithName("Obter Eventos")
 .WithOpenApi();
 
 app.Run();

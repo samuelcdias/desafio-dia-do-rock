@@ -1,3 +1,4 @@
+@RockBackend_HostAddress = https://localhost:7126
 @BaseUrl = http://localhost:5071
 
 @Id = 1 
@@ -7,22 +8,26 @@
 GET {{BaseUrl}}/eventos/
 Accept: application/json
 
-### Get By Id
-GET {{BaseUrl}}/eventos/{{Id}}
-Accept: application/json
 
 ### Create new event
-POST {{BaseUrL}}/eventos/
+POST {{BaseUrL}}/eventos
 Content-Type: application/json
 
-{
-    title: '',
-    image: '',
-    description: '',
-    address: '',
-    datetime: '',
-    position: {
-        lat: 0,
-        lng: 0,
-    },
-}
+ {
+    "title": "Rock in Rio",
+    "image": "https://gizmodo.uol.com.br/wp-content/blogs.dir/8/files/2022/09/rock-in-rio-1024x683-1.webp",
+    "bands": [
+      "Iron Maiden",
+      "Ac/Dc",
+      "Red Hot Chili Peppers"
+    ],
+    "description": "O maior festival de música e entretenimento do mundo, reunindo grandes nomes do rock internacional e nacional.",
+    "address": "Parque Olímpico, Rio de Janeiro",
+    "datetime": "2024-09-27T18:00:00.000Z",
+    "position": {
+      "lat": -22.977112,
+      "lng": -43.396305
+    }
+  }
+
+###

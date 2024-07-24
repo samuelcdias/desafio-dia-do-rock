@@ -39,11 +39,12 @@ public class EventService : IEventService
             Address = model.Address.Name.Value
         };
 
+        
         await _context.Eventos.AddAsync(modelData);
 
         var imageData = new Image() {
-            EventId = modelData.Id,
-            Url = model.Image
+           EventId = modelData.Id,
+           Url = model.Image
         };
 
         await _context.Imagens.AddAsync(imageData);
@@ -54,15 +55,17 @@ public class EventService : IEventService
 
         var eventBands = bandsData.Select(band => new EventBand()
         {
-            EventId = modelData.Id,
-            BandId = band.Id
+           EventId = modelData.Id,
+           BandId = band.Id
         });
 
+        //TODO: salvar de forma única
+        
         await _context.EventBands.AddRangeAsync(eventBands);
 
     }
 
-    public async Task<PaginationDto<EventDto>> GetEvents(string filtro, int page)
+    public async Task<PaginationDto<EventDto>> GetEvents(string? filtro = null, int page = 0)
     {
         const int pageSize = 10;
 
@@ -72,13 +75,20 @@ public class EventService : IEventService
                     where e.Title.Contains(filtro)
                         || e.Description.Contains(filtro)
                         || e.Address.Contains(filtro)
-                    select new EventDto()
+                    select new Event()
                     {
                         Id = e.Id,
                         Address = e.Address,
                         Date = DateTime.ParseExact(e.Date, "yyyy-MM-ddTHH:mm:ss.zzz", null).ToString("dd/MM/yyyy HH:mm"),
                         Description = e.Description,
-                        Image = i.Url,
+                        Image = new Image()
+                        {
+                            Id = i.Id,
+                            Url = i.Url,
+                            EventId = i.EventId
+                        },
+                        Latitude = e.Latitude,
+                        Longitude = e.Longitude,
                         Title = e.Title,
                     };
         var queryBands = from e in query
@@ -95,7 +105,11 @@ public class EventService : IEventService
                              Description = g.First().Event.Description,
                              Image = g.First().Event.Image.Url,
                              Title = g.First().Event.Title,
-                             Bands = g.Select(b => b.Band.Nome).ToList()
+                             Bands = g.Select(b => b.Band.Nome).ToList(),
+                             Location = new LocationDto() {
+                                 Latitude = g.First().Event.Latitude,
+                                 Longitude = g.First().Event.Longitude
+                             }
                          };
         var count = await queryBands.CountAsync();
         var items = await queryBands.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();

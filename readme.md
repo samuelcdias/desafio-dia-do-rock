@@ -14,6 +14,7 @@ Desenvolvimento de um layout completo para de uma aplicação para visualizaçã
 * [🎸/🎙️ViniDam](https://github.com/Vinidamiaop/Vinidamiaop)
 * [🎹Mizael Douglas](https://github.com/Mizaeldouglas)
 * [🥁Dhionys Soares](https://github.com/dhionys-soares)
+* [Samuel](https://github.com/samuelcdias) _Novo baixista_
 * [🎸Bruno Rocha](https://github.com/brunorocha-dev) _Saiu para gravar disco solo_
 
 ## ⚙️ Tecnologias
